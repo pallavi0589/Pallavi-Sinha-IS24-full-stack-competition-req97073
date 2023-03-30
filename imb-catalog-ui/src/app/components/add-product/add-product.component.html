@@ -1,0 +1,138 @@
+<div class="container-fluid p-0" [style.display]="!isEdit || (isEdit && productId) ? 'block' : 'none'">
+    <div class="row m-3">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <div class="page-header">
+                    <ng-container *ngIf="!isEdit">Add</ng-container> 
+                    <ng-container *ngIf="isEdit">Edit</ng-container> 
+                    Product
+                </div>
+
+                <div role="button" class="back-btn">
+                    <span class="material-symbols-outlined">
+                    arrow_back
+                    </span> 
+                    <span (click)="cancel()">Back</span>
+                </div>
+
+
+            </div>
+
+            <div class="container-fluid add-product-form">
+                
+                <div class="alert alert-danger mb-2" role="alert" *ngIf="errorText">
+                    <strong>Error</strong> {{errorText}}
+                </div>
+
+                <div class="alert alert-success mb-2" role="alert" *ngIf="successText">
+                    <strong>Success</strong> {{successText}} {{pingTime}}
+                </div>
+
+                <form [formGroup]="addProductForm" (ngSubmit)="submitForm()">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="productName">Product Name<span class="mandatory">*</span></label>
+                                <input type="text" class="form-control" formControlName="productName" id="productName"
+                                placeholder="Enter Product Name...">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="scrumMasterName">Scrum Master<span class="mandatory">*</span></label>
+                                <input type="text" class="form-control" formControlName="scrumMasterName"
+                                    id="scrumMasterName"
+                                    placeholder="Enter Scrum Master...">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="productOwnerName">Product Owner<span class="mandatory">*</span></label>
+                                <input type="text" class="form-control" formControlName="productOwnerName"
+                                    id="productOwnerName" placeholder="Enter Product Owner...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2" formArrayName="developers">
+                        <div class="col-12">
+                            <label for="developers">Developers<span class="mandatory pe-2">*</span> 
+                                <small>(Select upto {{developerLimit}}) </small>
+                            </label>
+                            <div class="row mt-2" *ngFor="let child of developersFA; let i = index">
+                                <div class="form-group col-md-4" formGroupName="{{i}}">
+                                    <input formControlName="name" class="form-control" type="text"
+                                    placeholder="Enter Developer..." id="developers">
+                                </div>
+                                <div class="col-2 d-flex">
+                                    <div *ngIf="i >= 1" class="mx-2">
+                                        <button type="button" class="imb-catalog-btn-rm" (click)="deleteDeveloper(i)">
+                                            <span class="material-symbols-outlined" title="Delete Developer">
+                                                delete_forever
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <div *ngIf="i === (developersFA.length -1) && developersFA.length < developerLimit">
+                                        <button type="button" class="imb-catalog-btn-add" (click)="addDeveloper(null)">
+                                            <span class="material-symbols-outlined" title="Add Developer">
+                                                add_task
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="startDate">Start Date<span class="mandatory">*</span></label>
+                                <div class="form-control imb-datepicker">
+
+                                    <input type="text" *ngIf="isEdit" [value]="startDate" readonly>
+
+                                    <ng-container *ngIf="!isEdit">
+                                        <input matInput [matDatepicker]="picker" formControlName="startDate" 
+                                        readonly placeholder="Select Date...">
+                                        <div class="picker">
+                                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                        </div>
+                                    </ng-container>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="methodology">Methodology<span class="mandatory">*</span>[Please change value from dropdown]</label>
+                                <select formControlName="methodology" class="form-control" id="methodology">
+                                    <option [value]="x" *ngFor="let x of methodologyList">{{x | titlecase}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="container-fluid text-end p-0">
+
+                        <button type="submit" class="imb-catalog-btn-secondary mt-4 me-2"
+                        (click)="cancel()">Cancel</button>
+    
+                        
+                        <button type="submit" class="imb-catalog-btn-primary mt-4" *ngIf="!isEdit"
+                        >Add Product</button>
+    
+                        
+                        <button type="submit" class="imb-catalog-btn-primary mt-4" *ngIf="isEdit"
+                        >Save</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

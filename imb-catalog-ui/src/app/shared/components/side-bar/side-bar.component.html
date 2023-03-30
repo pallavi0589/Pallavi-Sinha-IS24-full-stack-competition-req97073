@@ -1,0 +1,9 @@
+<div class="h-100" style="background-color: #ffffff;">
+    <div class="side-bar-icon" *ngFor="let icon of sidebarIcons">
+        <div [class]="icon.route === currentRoute ? 'holder-active' : 'holder-inactive'">
+            <span [class]="icon.route === currentRoute ? 'material-symbols-outlined icon-active' : 'material-symbols-outlined icon-inactive'" title="All Products" (click)="goTo(icon.route)">
+                {{icon.name}}
+            </span>
+        </div>
+    </div>
+</div>

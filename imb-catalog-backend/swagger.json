@@ -1,0 +1,194 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "IMB Catalog - Node with Express",
+        "version": "1.0.0",
+        "title": "IMB Catalog"
+    },
+        "servers": [
+          {
+            "url": "http://localhost:3000",
+            "description": "Development server"
+          }
+        ],
+        "components": {
+            "schemas": {
+              "Product": {
+                "properties": {
+                    "productId": {
+                      "type": "string",
+                      "description": "The ID of the product to be updated"
+                    },
+                    "productName": {
+                      "type": "string",
+                      "description": "The updated name of the product"
+                    },
+                    "productDescription": {
+                      "type": "string",
+                      "description": "The updated description of the product"
+                    },
+                    "productPrice": {
+                      "type": "number",
+                      "description": "The updated price of the product"
+                    }
+                  },
+                "required": ["productId", "productName", "productDescription", "productPrice"]
+              },
+              "Error": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": ["title", "message"]
+              }
+            }
+          },
+        "paths": {
+          "/api/products": {
+            "get": {
+              "summary": "Get all products",
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Product"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "post": {
+              "summary": "Create a new product",
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Product"
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "productId": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Bad Request",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/products/{id}": {
+            "get": {
+              "summary": "Get a product by ID",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "ID of the product to retrieve",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Product"
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "description": "Not Found",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/products/edit": {
+            "post": {
+              "summary": "Update an existing product",
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Product"
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "productId": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Bad Request",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+        }
+    }  
+}
+      

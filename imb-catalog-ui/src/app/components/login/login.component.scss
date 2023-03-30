@@ -1,0 +1,35 @@
+.login-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #221ECC;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+
+    color: #ffffff;
+
+    input {
+        width: 250px;
+        border: none;
+        background-color: rgb(224, 224, 224);
+        padding: 10px 20px;
+    }
+
+    input:focus {
+        border: none;
+        outline: none;
+    }
+
+    .login-btn {
+        background-color: transparent;
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        border-radius: 60px;
+        padding: 5px 20px;
+    }
+}

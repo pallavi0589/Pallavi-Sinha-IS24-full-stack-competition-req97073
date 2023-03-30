@@ -1,0 +1,60 @@
+@import '../product-list/product-list.component.scss';
+
+.add-product-form {
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.form-group label {
+    color: grey !important;
+}
+
+.mandatory {
+    color: rgb(175, 55, 55);
+    font-size: 18px;
+}
+
+.alert-danger {
+    transition: 0.2s;
+    padding: 10px !important;
+    margin-bottom: 0;
+}
+
+.imb-datepicker {
+    height: 40px;
+    position: relative;
+    padding: 5px;
+    input {
+        border: none;
+        outline: none;
+        width: calc(100% - 47px);
+    }
+
+    input:focus {
+        border: none;
+        outline: none;
+    }
+
+    .picker {
+        position: absolute; 
+        right: 0; 
+        top: -7px; 
+        height: 100%;
+    }
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+
+    .material-symbols-outlined {
+        font-size: 16px;
+        margin-right: 4px;
+    }
+    transition: 0.1s;
+
+}
+
+.back-btn:hover {
+    font-weight: bold;
+}
