@@ -19,7 +19,9 @@ VS Code
 2.	Ng serve
 
 **Once application is up and running, user will land to the login page**
+
 userName - lisa or alan [ userName is not case sensative].
+
 password - anything you can give as password.
 
 ** This application has used three CRUD operations [ GET, POST , PUT]**
