@@ -10,12 +10,12 @@ VS Code
 
 **To run Backend Project **
 
-1.	Npm install
+1.	Run 'Npm install' on folder imb-catalog-backend.
 2.	Npm run dev
 3.	localhost:3000/api-docs → to access swagger
 
 **To Run Angular Project** 
-1.	Npm install
+1.	Run 'Npm install' on folder imb-catalog-ui.
 2.	Ng serve
 
 **Once application is up and running, user will land to the login page**
