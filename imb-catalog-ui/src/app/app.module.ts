@@ -50,7 +50,7 @@ import { EditAccessGuard } from './shared/services/edit-access-guard.service';
     ToastrModule.forRoot(),
     MatMomentDateModule 
   ],
-  providers: [CommonService, UserService, AuthGuard, AddAccessGuard, EditAccessGuard],
+  providers: [CommonService, UserService, AuthGuard, AddAccessGuard, EditAccessGuard,SearchPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

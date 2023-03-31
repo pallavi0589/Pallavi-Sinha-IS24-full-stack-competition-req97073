@@ -12,7 +12,6 @@ export class UserService {
   setUser(userEntity: any) { 
     this.userEntity = this.setAccess(userEntity);
     sessionStorage.setItem("loggedIn", JSON.stringify(this.userEntity)); 
-    console.log("Setting data")
     this.userUpdated.next(this.userEntity);  
   }  
 

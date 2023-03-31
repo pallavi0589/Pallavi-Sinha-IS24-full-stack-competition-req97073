@@ -18,11 +18,13 @@ import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export class SearchBoxComponent implements AfterViewInit {
   @Input('searchPlaceholder') searchPlaceholder = 'Filter...';
   @Output() searchTextEvent = new EventEmitter();
-  @ViewChild('searchBox') searchBox: any;
+  @ViewChild('searchBox') searchBox: any; //The component uses the '@ViewChild' decorator to get a reference to the search box element in the component's view.
 
   private searchTextListener: any;
   public searchText: string | null = null;
-
+// The 'ngAfterViewInit' method sets up an event listener on the search box element using the 'fromEvent' function from the 'rxjs' module. 
+// The method then pipes the observable with some operators to map the input event to the search text value, debounce the events by 100ms to avoid too many search queries,
+// and filter out repeated search text values. Finally, the method subscribes to the observable and emits the search text value to the parent component via the 'searchTextEvent' output property.
   ngAfterViewInit() {
     this.searchTextListener = fromEvent(this.searchBox.nativeElement, 'input')
       .pipe(

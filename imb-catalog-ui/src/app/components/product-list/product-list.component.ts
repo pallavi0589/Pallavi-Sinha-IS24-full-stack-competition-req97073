@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AppConstants } from 'src/app/app.constants';
+import { SearchPipe } from 'src/app/shared/pipes/search.pipe';
 import { CommonService } from 'src/app/shared/services/common-service.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { DateUtility } from 'src/app/shared/utils/date.util';
@@ -28,7 +29,7 @@ export class ProductListComponent implements OnDestroy, OnInit {
   public addAccess = false;
   
   constructor(private router: Router, private commonService: CommonService, private route: ActivatedRoute,
-    private userService: UserService) {
+    private userService: UserService ,private searchPipe: SearchPipe) {
     this.getProductList();
     this.route.params.subscribe(params => {
       this.addedProduct = params['id'];
@@ -73,6 +74,16 @@ export class ProductListComponent implements OnDestroy, OnInit {
   edit(id: string) {
     this.router.navigate([AppConstants.EDIT_PRODUCT_ROUTE+"/"+id]);
   }
+
+  /*----------METHOD CALL TO DISPLAY THE LIST ON THE BASIS SEARCH OPTION ----------*/
+  onSearch(searchText: string) {
+    if(searchText){
+      this.productListData = this.searchPipe.transform(this.productListData,this.filterKey,searchText);
+    } else {
+      this.getProductList();
+    }
+  }
+
 
   ngOnDestroy(): void {
     this.getProductSubscription?.unsubscribe();

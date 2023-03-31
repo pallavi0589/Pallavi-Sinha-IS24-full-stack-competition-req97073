@@ -1,6 +1,9 @@
 <div class="h-100" style="background-color: #ffffff;">
+    <!-- This div repeats for each icon in the sidebarIcons array -->
     <div class="side-bar-icon" *ngFor="let icon of sidebarIcons">
+         <!-- This div contains the icon and adds a class based on whether it's the current route or not -->
         <div [class]="icon.route === currentRoute ? 'holder-active' : 'holder-inactive'">
+            <!-- This span contains the icon and adds a class based on whether it's the current route or not -->
             <span [class]="icon.route === currentRoute ? 'material-symbols-outlined icon-active' : 'material-symbols-outlined icon-inactive'" title="All Products" (click)="goTo(icon.route)">
                 {{icon.name}}
             </span>

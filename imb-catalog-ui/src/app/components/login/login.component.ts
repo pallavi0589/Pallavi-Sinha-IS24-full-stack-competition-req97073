@@ -24,7 +24,6 @@ export class LoginComponent {
 // The submitForm() method is called when the user clicks on the login button. If the form is valid, it checks the username entered by the user and sets the user information using the UserService and navigates to the home page using the Router.
   submitForm() {
     if(this.loginForm.valid) {
-      console.log(this.loginForm.value.username);
       if((this.loginForm.value.username).toLowerCase() === 'lisa') {
         this.userService.setUser({
           'username': 'lisa',

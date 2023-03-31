@@ -1,15 +1,18 @@
+<!-- This code displays a table of products with various columns like Product Number, Product Name, Scrum Master, Product Owner, Developers Name, Start Date, Methodology, and Actions column. -->
 <div class="container-fluid p-0">
     <div class="row m-3">
         <div class="col-12">
+             <!-- Displays the header of the table and total number of products -->
             <div class="d-flex justify-content-between">
                 <div class="page-header">All Products</div>
-                <div class="text-right p-2 font-weight-bold"><strong>Total Products -> {{productListData.length}}</strong></div>
+                <div class="text-right p-2 font-weight-bold"><strong>Total Products : {{productListData.length}}</strong></div>
             </div>
-            
+              <!-- Displays the search box and add new product button -->
             <div class="table-header-section">
-                <app-search-box [searchPlaceholder]="searchPlaceholder" (searchTextEvent)="searchText = $event;"></app-search-box>
+                <app-search-box [searchPlaceholder]="searchPlaceholder" (searchTextEvent)="onSearch($event)"></app-search-box>
                 <button type="button" (click)="goTo('add-product')" class="imb-catalog-btn-primary" *ngIf="addAccess">+ New Product</button>
             </div>
+              <!-- Displays the table with product data, and paginates it as per the given configuration -->
             <div class="table-responsive p-2">
                 <table class="table product-table">
                     <thead>
@@ -25,9 +28,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                         <!-- Displays the product data in the table rows -->
                         <ng-container *ngIf="productListData.length else noData">
                             <tr
-                            *ngFor="let data of productListData | search:filterKey:searchText | paginate: { itemsPerPage: paginationLimit, currentPage: currentPage }">
+                            *ngFor="let data of productListData | paginate: { itemsPerPage: paginationLimit, currentPage: currentPage }">
                             <td [style.backgroundColor]="data.productId === addedProduct ? '#f3f4bb' : 'transparent'">{{data.productId}}</td>
                             <td [style.backgroundColor]="data.productId === addedProduct ? '#f3f4bb' : 'transparent'">{{data.productName}}</td>
                             <td [style.backgroundColor]="data.productId === addedProduct ? '#f3f4bb' : 'transparent'">{{data.scrumMasterName}}</td>
@@ -44,7 +48,7 @@
                             </td>
                         </tr>
                         </ng-container>
-
+                         <!-- Displays "No Data" if there is no product data available -->
                         <ng-template #noData>
                             <tr class="text-center">
                                 <td colspan="7">No Data</td>

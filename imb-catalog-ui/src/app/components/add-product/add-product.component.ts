@@ -9,7 +9,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription, timer } from 'rxjs';
-import { UserService } from 'src/app/shared/services/user.service';
 import { ConstructFormDataUtility } from 'src/app/shared/utils/constructFormData.util';
 import { AppConstants } from '../../app.constants';
 import { CommonService } from '../../shared/services/common-service.service';
@@ -113,9 +112,17 @@ export class AddProductComponent implements OnDestroy {
           this.toastr.error('An unexpected error occurred, please try again later');
         }
       );
-    } else {
-      this.toastr.error('Please enter all the details to continue');
-    }
+    } 
+      else {
+        let errorMessage = 'Please fill the following fields:';
+        Object.keys(this.addProductForm.controls).forEach(key => {
+          const control = this.addProductForm.get(key);
+          if (control?.invalid) {
+            errorMessage += `\n- ${key}`;
+          }
+        });
+        this.toastr.error(errorMessage);
+      }
   }
 
   /*----------METHOD TO EDIT PRODUCT----------*/
@@ -141,8 +148,15 @@ export class AddProductComponent implements OnDestroy {
           this.toastr.error('An unexpected error occurred, please try again later');
         }
       );
-    } else {
-      this.toastr.error('Please enter all the details to continue');
+    }  else {
+      let errorMessage = 'Please fill the following fields:';
+      Object.keys(this.addProductForm.controls).forEach(key => {
+        const control = this.addProductForm.get(key);
+        if (control?.invalid) {
+          errorMessage += `\n- ${key}`;
+        }
+      });
+      this.toastr.error(errorMessage);
     }
   }
 
@@ -156,7 +170,6 @@ export class AddProductComponent implements OnDestroy {
           if(res.productId) {
             this.productId = id;
             for(let z in res) {
-              console.log(z);
               if(z === 'startDate') {
                 this.addProductForm.get(z)?.patchValue(new Date(res[z]));
                 this.startDate = moment(res[z]).format('YYYY/MM/DD');
