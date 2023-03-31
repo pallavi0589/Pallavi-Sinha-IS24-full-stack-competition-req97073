@@ -1,8 +1,10 @@
+// Note that this code relies on the fs and faker modules, so they must be installed before running this code.
 const productListFile = "./product-list.json";
 const { faker } = require('@faker-js/faker');
 const fs = require("fs");
-
+// A set of functions to perform CRUD (Create, Read, Update, Delete) operations on a product list JSON file.
 module.exports = {
+  // Generates mock product data by using the faker library and saves it to the JSON file. The function takes an integer numOfProducts which specifies the number of products to generate.
   generateMockData: (numOfProducts) => {
     for (let i = 0; i < numOfProducts; i++) {
       const randomDeveloper = Math.random() * 5;
@@ -30,6 +32,8 @@ module.exports = {
   updateProduct: (data) => updateProduct(data)
 };
 
+      // Validates the input data, generates a new product ID and saves it to the JSON file.
+      // It returns the product ID if successful, or false if validation fails.
 function saveProduct(data) {
   const productModel = validateData(data);
   if(productModel) {
@@ -41,7 +45,8 @@ function saveProduct(data) {
     return false;
   }
 }
-
+// Updates a product with the given productId in the JSON file. 
+// It returns the product ID if successful, or false if the product is not found.
 function updateProduct(data) {
     const existingData = getAllProducts();
     const selectedProductIndex = existingData.findIndex(x => x.productId === data.productId);
