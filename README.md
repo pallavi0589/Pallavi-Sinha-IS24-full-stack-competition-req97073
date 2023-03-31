@@ -12,17 +12,17 @@ VS Code
 
 1.	Run 'Npm install' on folder imb-catalog-backend.
 2.	Npm run dev
-3.	localhost:3000/api-docs → to access swagger
+3.	localhost:3000/api/api-docs → to access swagger
 
 **To Run Angular Project** 
 1.	Run 'Npm install' on folder imb-catalog-ui.
-2.	Ng serve
+2.	Ng serve --open
 
 **Once application is up and running, user will land to the login page**
 
-userName - lisa or alan [ userName is not case sensative].
+**userName** - lisa or alan [ userName is not case sensative].
 
-password - anything you can give as password.
+**password** - anything you can give as password.
 
 ** This application has used three CRUD operations [ GET, POST , PUT]**
 
