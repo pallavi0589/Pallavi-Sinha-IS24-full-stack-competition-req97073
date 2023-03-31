@@ -26,3 +26,8 @@ password - anything you can give as password.
 
 ** This application has used three CRUD operations [ GET, POST , PUT]**
 
+**For User Story Four and Five, Search Feature will work only if below conditions met**
+
+1) LISA, enter value of only Scrum Master.
+2) ALAN , enter value of only Developers.
+3) For other fields , search code is not implemented. [As given in Acceptance Criteria]
